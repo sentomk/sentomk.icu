@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>a [commonplace</title>
+    <meta
+      name="description"
+      content="A quiet blog for essays, engineering notes, and unfinished thoughts."
+    />
+    <link rel="stylesheet" href="styles.css?v=2" />
+  </head>
+  <body class="home-page">
+    <div class="page-shell">
+      <header class="site-header">
+        <div class="site-header__inner">
+          <a class="site-brand" href="index.html">Hide and Seek</a>
+          <nav class="site-nav" aria-label="Primary">
+            <a href="#essays">文章</a>
+            <a href="#notes">短札</a>
+            <a href="#archive">归档</a>
+          </nav>
+        </div>
+      </header>
+
+      <main class="home-layout">
+        <section class="hero">
+          <p class="hero__eyebrow">ESSAYS, NOTES, AND CODE</p>
+          <h1>一个适合认真写字的博客。</h1>
+          <p class="hero__lede">
+            参考传统技术博客的气质，但不做陈旧复刻。这里更像一本持续增补的工作日志：
+            写程序、读系统、记问题，也保留一点缓慢和留白。
+          </p>
+        </section>
+
+        <section class="featured-post">
+          <div class="featured-post__meta">
+            <span>Featured Essay</span>
+            <span>April 2, 2026</span>
+          </div>
+          <h2>
+            <a href="posts/on-building-small-things.html"
+              >为什么我更喜欢“小而明确”的个人网站</a
+            >
+          </h2>
+          <p>
+            一个博客不需要先长成产品。先有稳定的排版、清晰的索引、可以长期追加的文章结构，
+            往往比功能堆叠更重要。
+          </p>
+        </section>
+
+        <div class="content-grid">
+          <section class="post-list" id="essays">
+            <div class="section-heading">
+              <p>Essays</p>
+              <h2>长文章</h2>
+            </div>
+
+            <article class="post-card">
+              <div class="post-card__meta">
+                <time datetime="2026-04-02">2026-04-02</time>
+                <span>设计 / 写作</span>
+              </div>
+              <h3>
+                <a href="posts/on-building-small-things.html"
+                  >为什么我更喜欢“小而明确”的个人网站</a
+                >
+              </h3>
+              <p>
+                从信息密度、排版节奏和长期维护成本出发，重新理解内容型博客的价值。
+              </p>
+            </article>
+
+            <article class="post-card">
+              <div class="post-card__meta">
+                <time datetime="2026-03-25">2026-03-25</time>
+                <span>工程 / 工具</span>
+              </div>
+              <h3><a href="#">把开发日志写成能复用的文章</a></h3>
+              <p>
+                一次问题排查，如果能留下背景、判断和结论，它就不只是备忘录，而是知识资产。
+              </p>
+            </article>
+
+            <article class="post-card">
+              <div class="post-card__meta">
+                <time datetime="2026-03-18">2026-03-18</time>
+                <span>系统 / 观察</span>
+              </div>
+              <h3><a href="#">读完一段源码之后，应该记录什么</a></h3>
+              <p>
+                不只是 API 和结论，更要记下那些让你改变理解模型的边界条件。
+              </p>
+            </article>
+          </section>
+
+          <aside class="sidebar">
+            <section class="sidebar-panel" id="notes">
+              <div class="section-heading">
+                <p>Notebook</p>
+                <h2>短札</h2>
+              </div>
+              <ul class="note-list">
+                <li>
+                  <span>04.01</span>
+                  <a href="#">博客首页不该像产品落地页，目录感比 CTA 更重要。</a>
+                </li>
+                <li>
+                  <span>03.30</span>
+                  <a href="#">正文宽度宁可偏窄，也不要让技术文章变成横向扫描任务。</a>
+                </li>
+                <li>
+                  <span>03.28</span>
+                  <a href="#">好的归档页不是“旧文章列表”，而是你的长期思考地图。</a>
+                </li>
+              </ul>
+            </section>
+
+            <section class="sidebar-panel about-panel">
+              <div class="section-heading">
+                <p>About</p>
+                <h2>关于这里</h2>
+              </div>
+              <p>
+                这是一个静态博客雏形。没有引入框架，也没有复杂交互，重点放在排版、
+                层次和可持续写作的氛围上。
+              </p>
+            </section>
+
+            <section class="sidebar-panel" id="archive">
+              <div class="section-heading">
+                <p>Archive</p>
+                <h2>归档</h2>
+              </div>
+              <ul class="archive-list">
+                <li><a href="#">2026 / 04</a><span>1</span></li>
+                <li><a href="#">2026 / 03</a><span>2</span></li>
+                <li><a href="#">2026 / 02</a><span>0</span></li>
+              </ul>
+            </section>
+          </aside>
+        </div>
+      </main>
+    </div>
+  </body>
+</html>
