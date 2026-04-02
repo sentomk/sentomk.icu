@@ -24,3 +24,13 @@ Open `index.html` directly in a browser, or serve the folder with any static fil
 
 Optional:
 - Build a single file: `python scripts/build_posts.py --file posts/markdown/your-post.md`
+
+## GitHub Pages
+
+- Workflow file: `.github/workflows/pages.yml`
+- Trigger: push to `main` (or manual `workflow_dispatch`)
+- Deploy target: repository root as static site
+
+First-time setup on GitHub:
+1. Go to `Settings -> Pages`
+2. Set `Source` to `GitHub Actions`
