@@ -266,7 +266,6 @@ a:hover {
 
 .site-nav a::after,
 .post-card h3 a::after,
-.note-list a::after,
 .archive-list a::after,
 .post-footer-nav a::after {
   position: absolute;
@@ -283,7 +282,6 @@ a:hover {
 
 .site-nav a:hover::after,
 .post-card h3 a:hover::after,
-.note-list a:hover::after,
 .archive-list a:hover::after,
 .post-footer-nav a:hover::after {
   transform: scaleX(1);
@@ -566,18 +564,14 @@ body.is-language-entering [data-i18n] {
   box-shadow: 0 16px 32px rgba(23, 31, 38, 0.06);
 }
 
-.note-list,
+.note-stream,
 .archive-list {
-  list-style: none;
   margin: 0;
   padding: 0;
 }
 
-.note-list li,
+.note-entry,
 .archive-list li {
-  display: grid;
-  grid-template-columns: auto 1fr;
-  gap: 0.8rem;
   padding: 0.75rem 0;
   border-top: 1px solid var(--border);
   transition:
@@ -585,23 +579,31 @@ body.is-language-entering [data-i18n] {
     border-color 0.22s ease;
 }
 
-.note-list li:hover,
+.note-entry:hover,
 .archive-list li:hover {
   transform: translateX(3px);
   border-color: var(--glow-strong);
 }
 
-.note-list li:first-child,
+.note-entry:first-child,
 .archive-list li:first-child {
   border-top: 0;
   padding-top: 0;
 }
 
-.note-list span,
+.note-entry__date,
 .archive-list span {
+  display: block;
+  margin-bottom: 0.38rem;
   color: var(--muted);
   font-family: var(--font-mono);
   font-size: 0.86rem;
+}
+
+.note-entry__body {
+  margin: 0;
+  color: var(--ink);
+  line-height: 1.64;
 }
 
 .about-panel p {

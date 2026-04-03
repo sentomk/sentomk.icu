@@ -76,7 +76,7 @@
         zh: "不只是 API 和结论，更要记下那些让你改变理解模型的边界条件。",
         en: "Record not only APIs and conclusions, but the edge conditions that changed your mental model.",
       },
-      notesHeading: { zh: "短札", en: "Notebook" },
+      notesHeading: { zh: "短札", en: "Notes" },
       note1: {
         zh: "博客首页不该像产品落地页，目录感比 CTA 更重要。",
         en: "A blog homepage should read like an index, not a product landing page. Directory sense matters more than CTA buttons.",
