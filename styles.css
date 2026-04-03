@@ -265,6 +265,30 @@ a:hover {
   font-size: 0.95rem;
 }
 
+.site-nav__sep {
+  color: var(--border);
+}
+
+[data-i18n] {
+  transition:
+    opacity 0.14s ease,
+    transform 0.18s ease,
+    filter 0.18s ease;
+}
+
+body.is-language-leaving [data-i18n] {
+  opacity: 0;
+  transform: translateY(0.2rem);
+  filter: blur(1px);
+}
+
+body.is-language-entering [data-i18n] {
+  opacity: 0;
+  transform: translateY(-0.2rem);
+  filter: blur(1px);
+}
+
+.language-toggle,
 .theme-toggle {
   appearance: none;
   padding: 0;
@@ -278,12 +302,25 @@ a:hover {
   transition: color 0.2s ease;
 }
 
+.language-toggle {
+  font: inherit;
+  font-size: 0.9rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.language-toggle:hover,
 .theme-toggle:hover {
   color: var(--accent);
 }
 
+.language-toggle:focus-visible,
 .theme-toggle:focus-visible {
   outline: 0;
+}
+
+.language-toggle:focus-visible {
+  color: var(--accent);
 }
 
 .theme-toggle:focus-visible .theme-toggle__icon {
@@ -651,6 +688,10 @@ a:hover {
   .site-header__inner {
     align-items: flex-start;
     flex-direction: column;
+  }
+
+  .site-nav {
+    gap: 0.8rem;
   }
 
   .hero {
