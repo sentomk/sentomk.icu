@@ -38,7 +38,7 @@
         zh: "参考传统技术博客的气质，但不做陈旧复刻。这里更像一本持续增补的工作日志：写程序、读系统、记问题，也保留一点缓慢和留白。",
         en: "It borrows the restraint of older technical blogs without turning into a replica. The site works more like a living notebook: code, systems, debugging notes, and enough whitespace to let the writing breathe.",
       },
-      featuredLabel: { zh: "编辑部精选", en: "Editor's Picks" },
+      featuredLabel: { zh: "精选", en: "Editor's Picks" },
       featuredDate: { zh: "2026年4月2日", en: "April 2, 2026" },
       featuredTitle: {
         zh: "为什么我更喜欢“小而明确”的个人网站",
