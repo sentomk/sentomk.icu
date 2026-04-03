@@ -95,6 +95,7 @@
         en: "This is a static blog prototype. No framework, no dense interaction layer, just typography, structure, and a setup that supports sustained writing.",
       },
       archiveHeading: { zh: "归档", en: "Archive" },
+      moreLabel: { zh: "更多", en: "More" },
     },
     "post-small-things": {
       documentTitle: {
@@ -103,6 +104,7 @@
       },
       navHome: { zh: "首页", en: "Home" },
       navEssays: { zh: "文章", en: "Essays" },
+      navNotes: { zh: "短札", en: "Notes" },
       navArchive: { zh: "归档", en: "Archive" },
       postKicker: { zh: "长文 / 2026年4月2日", en: "Essay / April 2, 2026" },
       postTitle: {
@@ -142,6 +144,79 @@
       nextPost: {
         zh: "下一篇：把开发日志写成能复用的文章",
         en: "Next: Turning a Dev Log into a Reusable Essay",
+      },
+    },
+    "essay-list": {
+      documentTitle: { zh: "文章", en: "Essays" },
+      navHome: { zh: "首页", en: "Home" },
+      navEssays: { zh: "文章", en: "Essays" },
+      navNotes: { zh: "短札", en: "Notes" },
+      navArchive: { zh: "归档", en: "Archive" },
+      listEyebrow: { zh: "文章", en: "ESSAYS" },
+      listTitle: { zh: "文章", en: "Essays" },
+      listLede: {
+        zh: "这里收录所有长文章。它们比首页展示得更完整，也更适合按时间顺序回看。",
+        en: "This page collects the long-form essays. It is the fuller view beyond the small selection shown on the homepage.",
+      },
+      essay1Meta: { zh: "设计 / 写作", en: "Design / Writing" },
+      essay1Title: {
+        zh: "为什么我更喜欢“小而明确”的个人网站",
+        en: "Why I Prefer Small, Definite Personal Websites",
+      },
+      essay1Excerpt: {
+        zh: "从信息密度、排版节奏和长期维护成本出发，重新理解内容型博客的价值。",
+        en: "A reconsideration of content-first blogs through information density, typography, and long-term maintenance cost.",
+      },
+      essay2Meta: { zh: "工程 / 工具", en: "Engineering / Tools" },
+      essay2Title: {
+        zh: "把开发日志写成能复用的文章",
+        en: "Turning a Dev Log into a Reusable Essay",
+      },
+      essay2Excerpt: {
+        zh: "一次问题排查，如果能留下背景、判断和结论，它就不只是备忘录，而是知识资产。",
+        en: "A debugging session becomes more than a memo once it preserves context, judgment, and conclusions.",
+      },
+      essay3Meta: { zh: "系统 / 观察", en: "Systems / Observation" },
+      essay3Title: {
+        zh: "读完一段源码之后，应该记录什么",
+        en: "What to Record After Reading a Piece of Source Code",
+      },
+      essay3Excerpt: {
+        zh: "不只是 API 和结论，更要记下那些让你改变理解模型的边界条件。",
+        en: "Record not only APIs and conclusions, but the edge conditions that changed your mental model.",
+      },
+    },
+    "note-list": {
+      documentTitle: { zh: "短札", en: "Notes" },
+      navHome: { zh: "首页", en: "Home" },
+      navEssays: { zh: "文章", en: "Essays" },
+      navNotes: { zh: "短札", en: "Notes" },
+      navArchive: { zh: "归档", en: "Archive" },
+      listEyebrow: { zh: "短札", en: "NOTES" },
+      listTitle: { zh: "短札", en: "Notes" },
+      listLede: {
+        zh: "这里放的是更轻的记录。一行判断、一小段想法，或者还没长成文章的念头。",
+        en: "This page holds the lighter entries: a short judgment, a compact thought, or an idea that has not yet grown into an essay.",
+      },
+      note1: {
+        zh: "博客首页不该像产品落地页，目录感比 CTA 更重要。",
+        en: "A blog homepage should read like an index, not a product landing page. Directory sense matters more than CTA buttons.",
+      },
+      note2: {
+        zh: "正文宽度宁可偏窄，也不要让技术文章变成横向扫描任务。",
+        en: "A slightly narrow measure is preferable to turning a technical article into a horizontal scanning task.",
+      },
+      note3: {
+        zh: "好的归档页不是“旧文章列表”，而是你的长期思考地图。",
+        en: "A good archive is not just a list of old posts. It is a map of long-term thinking.",
+      },
+      note4: {
+        zh: "如果一篇文章必须依赖夸张的标题才能被点开，多半说明正文本身还没准备好。",
+        en: "If an article needs an exaggerated title just to earn a click, the body probably is not ready yet.",
+      },
+      note5: {
+        zh: "工具链越复杂，就越应该写下那些“本来以为理所当然”的前提条件。",
+        en: "The more complex the toolchain, the more important it becomes to write down the assumptions that once felt obvious.",
       },
     },
   };

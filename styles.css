@@ -502,6 +502,36 @@ body.is-language-entering [data-i18n] {
   gap: 2.4rem;
 }
 
+.listing-layout {
+  max-width: 52rem;
+  margin: 0 auto;
+  padding-top: 2.5rem;
+}
+
+.listing-hero {
+  margin-bottom: 2.5rem;
+  animation: rise-in 0.8s ease-out both;
+}
+
+.listing-hero h1 {
+  margin: 0;
+  line-height: 1.1;
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  font-size: clamp(2.3rem, 5vw, 3.9rem);
+}
+
+.listing-hero__lede {
+  max-width: 38rem;
+  margin: 1.25rem 0 0;
+  color: var(--muted);
+  font-size: 1.05rem;
+}
+
+.listing-group {
+  animation: rise-in 0.9s ease-out both;
+}
+
 .section-heading {
   margin-bottom: 1.4rem;
 }
@@ -539,6 +569,37 @@ body.is-language-entering [data-i18n] {
 .post-card p {
   margin-bottom: 0;
   color: var(--muted);
+}
+
+.section-more {
+  margin-top: 1.1rem;
+}
+
+.section-more__link {
+  position: relative;
+  display: inline-block;
+  color: var(--muted);
+  font-family: var(--font-display);
+  font-size: 0.88rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.section-more__link::after {
+  position: absolute;
+  left: 0;
+  bottom: -0.16rem;
+  width: 100%;
+  height: 1px;
+  content: "";
+  background: currentColor;
+  transform: scaleX(0);
+  transform-origin: left center;
+  transition: transform 0.22s ease;
+}
+
+.section-more__link:hover::after {
+  transform: scaleX(1);
 }
 
 .sidebar {
@@ -604,6 +665,10 @@ body.is-language-entering [data-i18n] {
   margin: 0;
   color: var(--ink);
   line-height: 1.64;
+}
+
+.note-stream--full {
+  border-top: 1px solid var(--border);
 }
 
 .about-panel p {

@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="color-scheme" content="light dark" />
+    <title>文章</title>
+    <meta
+      name="description"
+      content="An archive page for long-form essays."
+    />
+    <script>
+      try {
+        const storedTheme = localStorage.getItem("theme");
+        const storedLanguage = localStorage.getItem("language");
+        if (storedTheme === "light" || storedTheme === "dark") {
+          document.documentElement.dataset.theme = storedTheme;
+        }
+        if (storedLanguage === "zh" || storedLanguage === "en") {
+          document.documentElement.dataset.language = storedLanguage;
+          document.documentElement.lang = storedLanguage === "zh" ? "zh-CN" : "en";
+        }
+      } catch (error) {
+        console.warn("Preferences could not be restored.", error);
+      }
+    </script>
+    <link rel="stylesheet" href="styles.css?v=7" />
+  </head>
+  <body class="listing-page" data-page="essay-list">
+    <div class="page-shell">
+      <header class="site-header">
+        <div class="site-header__inner">
+          <div class="site-links" aria-label="Social links">
+            <a class="site-links__item" href="https://github.com/sentomk" aria-label="GitHub" title="GitHub">
+              <svg viewBox="0 0 24 24" focusable="false" aria-hidden="true">
+                <path
+                  d="M12 2.25a10 10 0 0 0-3.16 19.49c.5.09.68-.21.68-.48v-1.7c-2.78.6-3.37-1.18-3.37-1.18a2.66 2.66 0 0 0-1.12-1.47c-.92-.63.07-.62.07-.62a2.11 2.11 0 0 1 1.54 1.03a2.15 2.15 0 0 0 2.94.84a2.17 2.17 0 0 1 .64-1.35c-2.22-.25-4.56-1.11-4.56-4.95a3.87 3.87 0 0 1 1.03-2.68a3.58 3.58 0 0 1 .1-2.65s.84-.27 2.75 1.02a9.44 9.44 0 0 1 5 0c1.91-1.29 2.75-1.02 2.75-1.02a3.58 3.58 0 0 1 .1 2.65a3.87 3.87 0 0 1 1.03 2.68c0 3.85-2.34 4.69-4.57 4.94a2.43 2.43 0 0 1 .69 1.89v2.8c0 .27.18.58.69.48A10 10 0 0 0 12 2.25Z"
+                ></path>
+              </svg>
+            </a>
+            <a class="site-links__item" href="mailto:sentomk@pm.me" aria-label="Email" title="Email">
+              <svg viewBox="0 0 24 24" focusable="false" aria-hidden="true">
+                <path
+                  d="M4.5 6.75h15a1.5 1.5 0 0 1 1.5 1.5v7.5a1.5 1.5 0 0 1-1.5 1.5h-15A1.5 1.5 0 0 1 3 15.75v-7.5a1.5 1.5 0 0 1 1.5-1.5Z"
+                ></path>
+                <path d="m4 8l8 6l8-6"></path>
+              </svg>
+            </a>
+            <a class="site-links__item" href="https://www.linkedin.com/in/sentomk" aria-label="LinkedIn" title="LinkedIn">
+              <svg viewBox="0 0 24 24" focusable="false" aria-hidden="true">
+                <rect x="4.25" y="4.25" width="15.5" height="15.5" rx="2.2"></rect>
+                <path d="M8.2 10.1v5.85"></path>
+                <path d="M8.2 8.2h.01"></path>
+                <path d="M12 15.95V12.8c0-1.15.62-1.9 1.72-1.9c1 0 1.48.68 1.48 1.9v3.15"></path>
+                <path d="M12 10.1v.92"></path>
+              </svg>
+            </a>
+            <a class="site-links__item site-links__item--hn" href="https://news.ycombinator.com/user?id=sentomk" aria-label="Hacker News" title="Hacker News">
+              <svg viewBox="0 0 24 24" focusable="false" aria-hidden="true">
+                <rect x="4" y="4" width="16" height="16" rx="1.6"></rect>
+                <path d="M9 8l3 4l3-4"></path>
+                <path d="M12 12v4"></path>
+              </svg>
+            </a>
+          </div>
+          <nav class="site-nav" aria-label="Primary">
+            <a href="index.html" data-i18n="navHome">首页</a>
+            <a href="essay.html" data-i18n="navEssays">文章</a>
+            <a href="note.html" data-i18n="navNotes">短札</a>
+            <a href="index.html#archive" data-i18n="navArchive">归档</a>
+            <span class="site-nav__sep" aria-hidden="true">|</span>
+            <button class="language-toggle" type="button" aria-label="切换语言"></button>
+            <button class="theme-toggle" type="button" aria-label="切换主题">
+              <span class="theme-toggle__icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24" focusable="false"></svg>
+              </span>
+            </button>
+          </nav>
+        </div>
+      </header>
+
+      <main class="listing-layout">
+        <section class="listing-hero">
+          <p class="hero__eyebrow" data-i18n="listEyebrow">ESSAYS</p>
+          <h1 data-i18n="listTitle">文章</h1>
+          <p class="listing-hero__lede" data-i18n="listLede">
+            这里收录所有长文章。它们比首页展示得更完整，也更适合按时间顺序回看。
+          </p>
+        </section>
+
+        <section class="listing-group">
+          <article class="post-card">
+            <div class="post-card__meta">
+              <time datetime="2026-04-02">2026-04-02</time>
+              <span data-i18n="essay1Meta">设计 / 写作</span>
+            </div>
+            <h3>
+              <a href="posts/on-building-small-things.html" data-i18n="essay1Title">
+                为什么我更喜欢“小而明确”的个人网站
+              </a>
+            </h3>
+            <p data-i18n="essay1Excerpt">
+              从信息密度、排版节奏和长期维护成本出发，重新理解内容型博客的价值。
+            </p>
+          </article>
+
+          <article class="post-card">
+            <div class="post-card__meta">
+              <time datetime="2026-03-25">2026-03-25</time>
+              <span data-i18n="essay2Meta">工程 / 工具</span>
+            </div>
+            <h3><a href="#" data-i18n="essay2Title">把开发日志写成能复用的文章</a></h3>
+            <p data-i18n="essay2Excerpt">
+              一次问题排查，如果能留下背景、判断和结论，它就不只是备忘录，而是知识资产。
+            </p>
+          </article>
+
+          <article class="post-card">
+            <div class="post-card__meta">
+              <time datetime="2026-03-18">2026-03-18</time>
+              <span data-i18n="essay3Meta">系统 / 观察</span>
+            </div>
+            <h3><a href="#" data-i18n="essay3Title">读完一段源码之后，应该记录什么</a></h3>
+            <p data-i18n="essay3Excerpt">
+              不只是 API 和结论，更要记下那些让你改变理解模型的边界条件。
+            </p>
+          </article>
+        </section>
+      </main>
+    </div>
+    <script src="theme.js?v=4"></script>
+  </body>
+</html>

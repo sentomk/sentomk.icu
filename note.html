@@ -4,10 +4,10 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="color-scheme" content="light dark" />
-    <title>为什么我更喜欢“小而明确”的个人网站</title>
+    <title>短札</title>
     <meta
       name="description"
-      content="A sample article page for a minimal, editorial blog."
+      content="A running stream of short notes."
     />
     <script>
       try {
@@ -24,11 +24,11 @@
         console.warn("Preferences could not be restored.", error);
       }
     </script>
-    <link rel="stylesheet" href="../styles.css?v=7" />
+    <link rel="stylesheet" href="styles.css?v=7" />
   </head>
-  <body class="post-page" data-page="post-small-things">
+  <body class="listing-page" data-page="note-list">
     <div class="page-shell">
-      <header class="site-header site-header--compact">
+      <header class="site-header">
         <div class="site-header__inner">
           <div class="site-links" aria-label="Social links">
             <a class="site-links__item" href="https://github.com/sentomk" aria-label="GitHub" title="GitHub">
@@ -38,12 +38,7 @@
                 ></path>
               </svg>
             </a>
-            <a
-              class="site-links__item"
-              href="mailto:sentomk@pm.me"
-              aria-label="Email"
-              title="Email"
-            >
+            <a class="site-links__item" href="mailto:sentomk@pm.me" aria-label="Email" title="Email">
               <svg viewBox="0 0 24 24" focusable="false" aria-hidden="true">
                 <path
                   d="M4.5 6.75h15a1.5 1.5 0 0 1 1.5 1.5v7.5a1.5 1.5 0 0 1-1.5 1.5h-15A1.5 1.5 0 0 1 3 15.75v-7.5a1.5 1.5 0 0 1 1.5-1.5Z"
@@ -69,10 +64,10 @@
             </a>
           </div>
           <nav class="site-nav" aria-label="Primary">
-            <a href="../index.html" data-i18n="navHome">首页</a>
-            <a href="../essay.html" data-i18n="navEssays">文章</a>
-            <a href="../note.html" data-i18n="navNotes">短札</a>
-            <a href="../index.html#archive" data-i18n="navArchive">归档</a>
+            <a href="index.html" data-i18n="navHome">首页</a>
+            <a href="essay.html" data-i18n="navEssays">文章</a>
+            <a href="note.html" data-i18n="navNotes">短札</a>
+            <a href="index.html#archive" data-i18n="navArchive">归档</a>
             <span class="site-nav__sep" aria-hidden="true">|</span>
             <button class="language-toggle" type="button" aria-label="切换语言"></button>
             <button class="theme-toggle" type="button" aria-label="切换主题">
@@ -84,60 +79,49 @@
         </div>
       </header>
 
-      <main class="post-layout">
-        <article class="post-article">
-          <header class="post-article__header">
-            <p class="post-article__kicker" data-i18n="postKicker">Essay / April 2, 2026</p>
-            <h1 data-i18n="postTitle">为什么我更喜欢“小而明确”的个人网站</h1>
-            <p class="post-article__lede" data-i18n="postLede">
-              一些网站努力证明自己什么都能做，于是首页像控制台、侧栏像导航树、每一个模块都在抢注意力。
-              我越来越偏向反方向：只保留真正重要的东西，让内容自己站出来。
+      <main class="listing-layout">
+        <section class="listing-hero">
+          <p class="hero__eyebrow" data-i18n="listEyebrow">NOTES</p>
+          <h1 data-i18n="listTitle">短札</h1>
+          <p class="listing-hero__lede" data-i18n="listLede">
+            这里放的是更轻的记录。一行判断、一小段想法，或者还没长成文章的念头。
+          </p>
+        </section>
+
+        <section class="listing-group note-stream note-stream--full">
+          <article class="note-entry">
+            <time class="note-entry__date" datetime="2026-04-01">04.01</time>
+            <p class="note-entry__body" data-i18n="note1">
+              博客首页不该像产品落地页，目录感比 CTA 更重要。
             </p>
-          </header>
-
-          <div class="post-article__body">
-            <p data-i18n="paragraph1">
-              写作型网站首先是一个阅读界面。页面最重要的工作，不是展示作者会多少技术，
-              而是让读者以尽可能低的摩擦进入文章。宽度、字距、层次、留白，这些看似保守的选择，
-              决定了一个网站能否被长期阅读。
+          </article>
+          <article class="note-entry">
+            <time class="note-entry__date" datetime="2026-03-30">03.30</time>
+            <p class="note-entry__body" data-i18n="note2">
+              正文宽度宁可偏窄，也不要让技术文章变成横向扫描任务。
             </p>
-
-            <p data-i18n="paragraph2">
-              我喜欢那些老派技术博客，并不是因为它们“旧”，而是因为它们在很多地方做得克制：
-              首页说明这是谁的站点、最近写了什么、历史上写过什么，仅此而已。
-              它们不试图把每一篇文章包装成营销资产，也不会要求每一次访问都转化成订阅或点击。
+          </article>
+          <article class="note-entry">
+            <time class="note-entry__date" datetime="2026-03-28">03.28</time>
+            <p class="note-entry__body" data-i18n="note3">
+              好的归档页不是“旧文章列表”，而是你的长期思考地图。
             </p>
-
-            <blockquote data-i18n="blockquote1">
-              一个博客最好的界面，往往是让人忘记界面的界面。
-            </blockquote>
-
-            <p data-i18n="paragraph3">
-              “简单”并不等于“随便”。真正的小网站仍然需要明确的视觉方向。
-              例如纸面感的底色、略带报刊气质的标题、压低饱和度的强调色，以及有节制的分隔线。
-              它们共同传达的信息是：这里适合安静地读，而不是快速地滑过去。
+          </article>
+          <article class="note-entry">
+            <time class="note-entry__date" datetime="2026-03-21">03.21</time>
+            <p class="note-entry__body" data-i18n="note4">
+              如果一篇文章必须依赖夸张的标题才能被点开，多半说明正文本身还没准备好。
             </p>
-
-            <h2 data-i18n="sectionTitle">我希望保留的几个特征</h2>
-
-            <p data-i18n="paragraph4">
-              第一，首页应该像目录页，而不是产品首页。第二，文章页应该把主要空间留给正文。
-              第三，归档必须清晰，因为博客的价值常常来自它的时间纵深，而不是最新一篇文章。
+          </article>
+          <article class="note-entry">
+            <time class="note-entry__date" datetime="2026-03-17">03.17</time>
+            <p class="note-entry__body" data-i18n="note5">
+              工具链越复杂，就越应该写下那些“本来以为理所当然”的前提条件。
             </p>
-
-            <p data-i18n="paragraph5">
-              如果将来再往这个网站上加功能，我也会优先考虑那些支持写作的东西：
-              标签、全文检索、RSS、代码块样式，而不是社交计数器、复杂推荐流或过度动画。
-            </p>
-          </div>
-        </article>
-
-        <nav class="post-footer-nav" aria-label="Post navigation">
-          <a href="../index.html" data-i18n="backHome">返回首页</a>
-          <a href="#" data-i18n="nextPost">下一篇：把开发日志写成能复用的文章</a>
-        </nav>
+          </article>
+        </section>
       </main>
     </div>
-    <script src="../theme.js?v=4"></script>
+    <script src="theme.js?v=4"></script>
   </body>
 </html>

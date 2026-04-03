@@ -24,7 +24,7 @@
         console.warn("Preferences could not be restored.", error);
       }
     </script>
-    <link rel="stylesheet" href="styles.css?v=6" />
+    <link rel="stylesheet" href="styles.css?v=7" />
   </head>
   <body class="home-page" data-page="home">
     <div class="page-shell">
@@ -70,8 +70,8 @@
           </div>
           <nav class="site-nav" aria-label="Primary">
             <a href="index.html" data-i18n="navHome">首页</a>
-            <a href="#essays" data-i18n="navEssays">文章</a>
-            <a href="#notes" data-i18n="navNotes">短札</a>
+            <a href="essay.html" data-i18n="navEssays">文章</a>
+            <a href="note.html" data-i18n="navNotes">短札</a>
             <a href="#archive" data-i18n="navArchive">归档</a>
             <span class="site-nav__sep" aria-hidden="true">|</span>
             <button class="language-toggle" type="button" aria-label="切换语言"></button>
@@ -153,6 +153,10 @@
                 不只是 API 和结论，更要记下那些让你改变理解模型的边界条件。
               </p>
             </article>
+
+            <div class="section-more">
+              <a class="section-more__link" href="essay.html" data-i18n="moreLabel">更多</a>
+            </div>
           </section>
 
           <aside class="sidebar">
@@ -180,6 +184,9 @@
                     好的归档页不是“旧文章列表”，而是你的长期思考地图。
                   </p>
                 </article>
+              </div>
+              <div class="section-more">
+                <a class="section-more__link" href="note.html" data-i18n="moreLabel">更多</a>
               </div>
             </section>
 
@@ -209,6 +216,6 @@
         </div>
       </main>
     </div>
-    <script src="theme.js?v=3"></script>
+    <script src="theme.js?v=4"></script>
   </body>
 </html>
