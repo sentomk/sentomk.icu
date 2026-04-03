@@ -3,22 +3,38 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="color-scheme" content="light dark" />
     <title>a·common·place</title>
     <meta
       name="description"
       content="A quiet blog for essays, engineering notes, and unfinished thoughts."
     />
-    <link rel="stylesheet" href="styles.css?v=2" />
+    <script>
+      try {
+        const storedTheme = localStorage.getItem("theme");
+        if (storedTheme === "light" || storedTheme === "dark") {
+          document.documentElement.dataset.theme = storedTheme;
+        }
+      } catch (error) {
+        console.warn("Theme preference could not be restored.", error);
+      }
+    </script>
+    <link rel="stylesheet" href="styles.css?v=3" />
   </head>
   <body class="home-page">
     <div class="page-shell">
       <header class="site-header">
         <div class="site-header__inner">
-          <a class="site-brand" href="index.html">Hide and Seek</a>
+          <a class="site-brand" href="index.html">Mostly Technical</a>
           <nav class="site-nav" aria-label="Primary">
             <a href="#essays">文章</a>
             <a href="#notes">短札</a>
             <a href="#archive">归档</a>
+            <button class="theme-toggle" type="button" aria-label="切换主题">
+              <span class="theme-toggle__icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24" focusable="false"></svg>
+              </span>
+            </button>
           </nav>
         </div>
       </header>
@@ -142,5 +158,6 @@
         </div>
       </main>
     </div>
+    <script src="theme.js?v=1"></script>
   </body>
 </html>

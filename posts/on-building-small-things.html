@@ -3,22 +3,38 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="color-scheme" content="light dark" />
     <title>为什么我更喜欢“小而明确”的个人网站</title>
     <meta
       name="description"
       content="A sample article page for a minimal, editorial blog."
     />
-    <link rel="stylesheet" href="../styles.css?v=2" />
+    <script>
+      try {
+        const storedTheme = localStorage.getItem("theme");
+        if (storedTheme === "light" || storedTheme === "dark") {
+          document.documentElement.dataset.theme = storedTheme;
+        }
+      } catch (error) {
+        console.warn("Theme preference could not be restored.", error);
+      }
+    </script>
+    <link rel="stylesheet" href="../styles.css?v=3" />
   </head>
   <body class="post-page">
     <div class="page-shell">
       <header class="site-header site-header--compact">
         <div class="site-header__inner">
-          <a class="site-brand" href="../index.html">Sentomk Journal</a>
+          <a class="site-brand" href="../index.html">Mostly Technical</a>
           <nav class="site-nav" aria-label="Primary">
             <a href="../index.html">首页</a>
             <a href="../index.html#essays">文章</a>
             <a href="../index.html#archive">归档</a>
+            <button class="theme-toggle" type="button" aria-label="切换主题">
+              <span class="theme-toggle__icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24" focusable="false"></svg>
+              </span>
+            </button>
           </nav>
         </div>
       </header>
@@ -77,5 +93,6 @@
         </nav>
       </main>
     </div>
+    <script src="../theme.js?v=1"></script>
   </body>
 </html>
