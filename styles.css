@@ -634,6 +634,11 @@ body.is-language-entering [data-i18n] {
   padding: 0;
 }
 
+.archive-list {
+  list-style: none;
+  padding-left: 0.72rem;
+}
+
 .note-entry,
 .archive-list li {
   padding: 0.75rem 0;
@@ -680,8 +685,29 @@ body.is-language-entering [data-i18n] {
 }
 
 .archive-list li {
-  grid-template-columns: 1fr auto;
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  column-gap: 0.58rem;
   align-items: center;
+}
+
+.archive-list li::before {
+  width: 0.56rem;
+  height: 0.56rem;
+  content: "";
+  border: 1.8px solid var(--muted);
+  border-radius: 999px;
+  background: var(--paper);
+}
+
+.archive-list li:hover::before {
+  border-color: var(--accent);
+}
+
+.archive-list span {
+  display: inline;
+  margin-bottom: 0;
+  justify-self: end;
 }
 
 .post-layout {

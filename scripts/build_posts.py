@@ -306,7 +306,7 @@ def build_post_html(title: str, metadata: dict[str, str], body_html: str, kind: 
         console.warn("Preferences could not be restored.", error);
       }}
     </script>
-    <link rel="stylesheet" href="../styles.css?v=7" />
+    <link rel="stylesheet" href="../styles.css?v=8" />
   </head>
   <body class="post-page">
     <div class="page-shell">
@@ -541,3 +541,4 @@ def main() -> int:
 
 if __name__ == "__main__":
     sys.exit(main())
+
