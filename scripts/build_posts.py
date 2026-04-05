@@ -291,22 +291,7 @@ def build_post_html(title: str, metadata: dict[str, str], body_html: str, kind: 
     <meta name="color-scheme" content="light dark" />
     <title>{html.escape(title)}</title>
     <meta name="description" content="{html.escape(description, quote=True)}" />
-    <link rel="icon" type="image/svg+xml" href="../favicon.svg" />
-    <script>
-      try {{
-        const storedTheme = localStorage.getItem("theme");
-        const storedLanguage = localStorage.getItem("language");
-        if (storedTheme === "light" || storedTheme === "dark") {{
-          document.documentElement.dataset.theme = storedTheme;
-        }}
-        if (storedLanguage === "zh" || storedLanguage === "en") {{
-          document.documentElement.dataset.language = storedLanguage;
-          document.documentElement.lang = storedLanguage === "zh" ? "zh-CN" : "en";
-        }}
-      }} catch (error) {{
-        console.warn("Preferences could not be restored.", error);
-      }}
-    </script>
+    <script src="../head.js?v=1"></script>
     <link rel="stylesheet" href="../styles.css?v=8" />
   </head>
   <body class="post-page">
@@ -542,3 +527,4 @@ def main() -> int:
 
 if __name__ == "__main__":
     sys.exit(main())
+
