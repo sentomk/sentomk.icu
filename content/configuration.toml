@@ -48,10 +48,9 @@ ctaUrl = "/projects"
 [_.personal]
 name = "sentomk.me"
 githubProfile = "https://github.com/sentomk"
-email = "sentomk@sentomk.me"
-twitterProfile = "https://twitter.com"
-linkedinProfile = "https://linkedin.com"
-hackerNewsProfile = "https://news.ycombinator.com"
+email = "sentomk@proton.me"
+linkedinProfile = "https://www.linkedin.com/in/sentomk"
+hackerNewsProfile = "https://news.ycombinator.com/user?id=sentomk"
 
 [_.texts]
 articlesName = "Articles"
