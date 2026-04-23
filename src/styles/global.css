@@ -135,9 +135,9 @@
 
   .zag-border-b {
     border-bottom: var(--zag-stroke) solid;
-    border-color: var(--color-zag-dark);
+    border-color: var(--color-neutral-300);
     &:where(.dark, .dark *) {
-      border-color: var(--color-zag-light);
+      border-color: var(--color-neutral-700);
     }
   }
 
