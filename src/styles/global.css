@@ -209,4 +209,31 @@
   .opsz {
     font-variation-settings: "opsz" 72;
   }
+
+  /* Custom scrollbar for code blocks */
+  pre {
+    overflow-x: auto;
+    scrollbar-width: thin;
+    scrollbar-color: var(--color-neutral-400) transparent;
+    &:where(.dark, .dark *) {
+      scrollbar-color: var(--color-neutral-600) transparent;
+    }
+  }
+
+  pre::-webkit-scrollbar {
+    height: 4px;
+  }
+
+  pre::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  pre::-webkit-scrollbar-thumb {
+    background: var(--color-neutral-400);
+    border-radius: 2px;
+  }
+
+  :where(.dark, .dark *) pre::-webkit-scrollbar-thumb {
+    background: var(--color-neutral-600);
+  }
 }

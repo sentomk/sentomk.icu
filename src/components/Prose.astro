@@ -1,6 +1,6 @@
 ---
 type Props = {
-	class?: string;
+  class?: string;
 };
 
 const { class: customClass } = Astro.props;
@@ -12,3 +12,26 @@ const { class: customClass } = Astro.props;
 >
   <slot />
 </div>
+
+<script is:inline>
+  document.querySelectorAll("pre > code").forEach((code) => {
+    const pre = code.parentElement;
+    pre.style.position = "relative";
+
+    const btn = document.createElement("button");
+    btn.textContent = "Copy";
+    btn.style.cssText = "position:absolute;top:6px;right:6px;border:none;background:none;font-family:inherit;font-size:12px;cursor:pointer;opacity:0;transition:opacity .15s;padding:2px 6px;";
+    btn.className = "zag-text-muted zag-transition";
+
+    pre.appendChild(btn);
+    pre.addEventListener("mouseenter", () => btn.style.opacity = "1");
+    pre.addEventListener("mouseleave", () => btn.style.opacity = "0");
+
+    btn.addEventListener("click", () => {
+      navigator.clipboard.writeText(code.textContent).then(() => {
+        btn.textContent = "Copied";
+        setTimeout(() => btn.textContent = "Copy", 1500);
+      });
+    });
+  });
+</script>
