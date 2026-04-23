@@ -1,0 +1,39 @@
+---
+import { getConfigurationCollection } from "../lib/utils";
+import Anchor from "./common/Anchor.astro";
+
+const { data: config } = await getConfigurationCollection();
+
+const date = new Date();
+const year = date.getFullYear();
+---
+
+<footer class="mt-24 border-t zag-border-b zag-transition">
+  <div class="p-4 max-w-2xl mx-auto">
+    <div class="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-6 py-6">
+      <!-- Left: name + tagline -->
+      <div class="flex flex-col gap-1">
+        <span class="font-display text-xs tracking-wider zag-text zag-transition">
+          {config.personal.name}
+        </span>
+        <span class="text-sm zag-text-muted zag-transition">
+          Code · Notes
+        </span>
+      </div>
+
+      <!-- Right: nav links -->
+      <nav class="flex gap-4 text-sm" aria-label="Footer navigation">
+        {
+          Object.entries(config.menu).map(([key, url]) => (
+            <Anchor url={url}>{key}</Anchor>
+          ))
+        }
+      </nav>
+    </div>
+
+    <!-- Bottom line: copyright -->
+    <div class="zag-border-b zag-transition py-3 text-center text-xs zag-text-muted zag-transition">
+      &copy; {year} {config.personal.name} · Built with <a href="https://github.com/RATIU5/zaggonaut" class="underline zag-offset" target="_blank" rel="noopener">Zaggonaut</a>
+    </div>
+  </div>
+</footer>

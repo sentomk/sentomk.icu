@@ -1,0 +1,33 @@
+---
+import type { SeriesFrontmatter } from "../../lib/types";
+import { getConfigurationCollection } from "../../lib/utils";
+import Anchor from "../common/Anchor.astro";
+import SeriesSnippet from "../SeriesSnippet.astro";
+
+type Props = {
+  featuredSeries: Array<SeriesFrontmatter>;
+};
+
+const { featuredSeries } = Astro.props;
+const { data: config } = await getConfigurationCollection();
+---
+
+<div class="flex justify-between items-center w-full">
+  <h3 class="font-display text-lg sm:text-xl leading-loose">{config.texts.seriesName}</h3>
+  <Anchor url="/series" class="text-base">{config.texts.viewAll}</Anchor>
+</div>
+<ul class="my-8">
+  {
+    (featuredSeries.length === 0 && <p>{config.texts.noSeries}</p>) ||
+      featuredSeries.map((s) => (
+        <li>
+          <SeriesSnippet
+            title={s.title}
+            description={s.description}
+            url={s.url}
+            tags={s.tags ?? []}
+          />
+        </li>
+      ))
+  }
+</ul>

@@ -1,0 +1,62 @@
+---
+import { getCollection, render } from "astro:content";
+import ArticleSnippet from "../../components/ArticleSnippet.astro";
+import Anchor from "../../components/common/Anchor.astro";
+import SeriesLayout from "../../layouts/SeriesLayout.astro";
+import { getConfigurationCollection } from "../../lib/utils";
+
+export async function getStaticPaths() {
+	const seriesEntries = await getCollection("series");
+	const allPosts = await getCollection("blog");
+	const { data: config } = await getConfigurationCollection();
+
+	return seriesEntries.map((s) => {
+		const postsInSeries = allPosts
+			.filter((post) => post.data.series === s.data.slug)
+			.sort((a, b) => a.data.timestamp.valueOf() - b.data.timestamp.valueOf());
+
+		return {
+			params: { id: s.data.slug },
+			props: {
+				series: {
+					...s,
+					data: {
+						...s.data,
+						url: `${config.site.baseUrl}/series/${s.data.slug}`,
+					},
+				},
+				posts: postsInSeries,
+			},
+		};
+	});
+}
+
+const { series, posts } = Astro.props;
+const { Content } = await render(series);
+const { data: config } = await getConfigurationCollection();
+---
+
+<SeriesLayout frontmatter={series.data}>
+  <Content />
+  {
+    posts.length > 0 && (
+      <div class="mt-12">
+        <h2 class="font-display text-xl leading-loose mb-6">Posts in this series</h2>
+        <ul>
+          {posts.map((post, i) => (
+            <li>
+              <ArticleSnippet
+                title={post.data.title}
+                description={post.data.description}
+                url={`/blog/${post.data.slug}`}
+                date={post.data.timestamp}
+                readTime={post.data.readTime}
+                tags={post.data.tags ?? []}
+              />
+            </li>
+          ))}
+        </ul>
+      </div>
+    )
+  }
+</SeriesLayout>

@@ -1,0 +1,70 @@
+---
+import { getConfigurationCollection } from "../lib/utils";
+import Anchor from "./common/Anchor.astro";
+import LangToggle from "./LangToggle.astro";
+import ThemeToggle from "./ThemeToggle.astro";
+
+const { data: config } = await getConfigurationCollection();
+---
+
+<header class="zag-bg zag-border-b zag-transition sticky top-0 w-full z-10">
+  <div
+    class="zag-bg zag-transition sm:hidden relative z-50 py-4 flex items-center"
+  >
+    <button class="px-4" type="button" aria-label="Toggle navigation menu">
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        width="32"
+        height="32"
+        viewBox="0 0 512 512"
+        class="zag-fill zag-transition"
+      >
+        <title>Navigation menu</title>
+        <path d="M80 96h352v32H80zm0 144h352v32H80zm0 144h352v32H80z"></path>
+      </svg>
+    </button>
+  </div>
+  <nav
+    class="zag-bg zag-border-b zag-transition fixed sm:relative inset-x-0 top-0 h-auto sm:px-4 flex justify-between flex-col gap-8 py-4 text-xl sm:flex-row max-w-2xl mx-auto sm:pt-4 sm:border-none"
+  >
+    <div
+      class="flex flex-col font-mono font-medium gap-4 sm:flex-row px-4 sm:px-0 mt-16 sm:mt-0"
+    >
+      {
+        Object.entries(config.menu).map((i) => (
+          <Anchor url={i[1]}>{i[0]}</Anchor>
+        ))
+      }
+    </div>
+    <div class="flex gap-4 items-center px-4 sm:px-0">
+      <LangToggle />
+      <ThemeToggle />
+    </div>
+  </nav>
+</header>
+
+<script>
+  const button = document.querySelector("button") as HTMLButtonElement;
+  const nav = document.querySelector("nav") as HTMLElement;
+  let isOpen = false;
+
+  function updateNavState() {
+    const isMobile = window.matchMedia("(max-width: 640px)").matches;
+    if (isMobile) {
+      nav.style.transform = isOpen ? "translateY(0)" : "translateY(-100%)";
+    } else {
+      nav.style.transform = "translateY(0)";
+      isOpen = false;
+    }
+  }
+
+  function toggleNav() {
+    isOpen = !isOpen;
+    updateNavState();
+  }
+
+  button?.addEventListener("click", toggleNav);
+  window.addEventListener("resize", updateNavState);
+
+  updateNavState();
+</script>

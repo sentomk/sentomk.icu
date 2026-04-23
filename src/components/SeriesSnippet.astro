@@ -1,0 +1,40 @@
+---
+import Anchor from "./common/Anchor.astro";
+
+export type Props = {
+	title: string;
+	description: string;
+	url: string;
+	tags: string[];
+	postCount?: number;
+};
+
+const { title, description, url, tags, postCount } = Astro.props;
+---
+
+<div class="relative flex flex-col gap-3 mb-8 hover-zag-dotted-grid">
+  <div class="flex flex-col gap-3 sm:flex-row sm:justify-between">
+    <Anchor url={url} class="text-xl">
+      {title}
+    </Anchor>
+    {
+      postCount !== undefined && (
+        <span class="zag-text-muted zag-transition text-sm self-center">
+          {postCount} {postCount === 1 ? "post" : "posts"}
+        </span>
+      )
+    }
+  </div>
+  <p class="zag-text zag-transition">
+    {description}
+  </p>
+  <div class="flex flex-row flex-wrap gap-2">
+    {
+      tags.map((tag) => (
+        <span class="-zag-text -zag-bg zag-transition px-2 py-1 text-sm font-semibold">
+          {tag}
+        </span>
+      ))
+    }
+  </div>
+</div>

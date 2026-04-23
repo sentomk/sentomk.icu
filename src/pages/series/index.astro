@@ -1,0 +1,73 @@
+---
+import { getCollection } from "astro:content";
+import Section from "../../components/common/Section.astro";
+import SeriesSnippet from "../../components/SeriesSnippet.astro";
+import Layout from "../../layouts/Layout.astro";
+import { getConfigurationCollection } from "../../lib/utils";
+
+const allSeries = (await getCollection("series")).sort(
+	(a, b) => b.data.timestamp.valueOf() - a.data.timestamp.valueOf(),
+);
+
+const allBlogs = await getCollection("blog");
+
+const { data: config } = await getConfigurationCollection();
+---
+
+<Layout>
+  <Fragment slot="head">
+    <title>{config.seriesMeta.title}</title>
+    <meta
+      name="description"
+      content={config.seriesMeta.longDescription ?? config.seriesMeta.description}
+    />
+    <meta property="og:title" content={config.seriesMeta.title} />
+    <meta
+      property="og:description"
+      content={config.seriesMeta.description}
+    />
+    {config.seriesMeta.keywords && (
+      <meta name="keywords" content={config.seriesMeta.keywords.join(", ")} />
+    )}
+    {config.seriesMeta.cardImage && (
+      <meta property="og:image" content={config.seriesMeta.cardImage} />
+    )}
+    <meta property="og:url" content={`${config.site.baseUrl}/series`} />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={config.seriesMeta.title} />
+    <meta
+      name="twitter:description"
+      content={config.seriesMeta.description}
+    />
+    {config.seriesMeta.cardImage && (
+      <meta name="twitter:image" content={config.seriesMeta.cardImage} />
+    )}
+    <meta http-equiv="content-language" content="en" />
+    <meta name="language" content="English" />
+    <link rel="canonical" href={`${config.site.baseUrl}/series`} />
+  </Fragment>
+  <Section class="py-4 my-8">
+    <div class="flex items-center gap-4 pt-8 pb-16">
+      <h1 class="font-display text-3xl sm:text-4xl leading-loose">{config.texts.seriesName}</h1>
+    </div>
+    <ul>
+      {
+        (allSeries.length === 0 && <p>{config.texts.noSeries}</p>) ||
+          allSeries.map((s) => {
+            const postCount = allBlogs.filter((b) => b.data.series === s.data.slug).length;
+            return (
+              <li>
+                <SeriesSnippet
+                  title={s.data.title}
+                  description={s.data.description}
+                  url={`/series/${s.data.slug}`}
+                  tags={s.data.tags ?? []}
+                  postCount={postCount}
+                />
+              </li>
+            );
+          })
+      }
+    </ul>
+  </Section>
+</Layout>
