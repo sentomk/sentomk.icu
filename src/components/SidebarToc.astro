@@ -1,0 +1,171 @@
+---
+// Terminal-style table of contents
+// - Desktop (1280px+): fixed right sidebar
+// - Mobile (<1280px): collapsible inline bar
+---
+
+<!-- Mobile collapsible TOC -->
+<div id="toc-mobile" class="xl:hidden zag-border-b zag-transition mb-8">
+  <button id="toc-toggle" class="w-full flex items-center gap-2 px-3 py-2 text-left cursor-pointer zag-bg hover:zag-bg/80 zag-transition border zag-border-b rounded">
+    <div class="flex gap-1">
+      <span class="w-2.5 h-2.5 rounded-full bg-red-400"></span>
+      <span class="w-2.5 h-2.5 rounded-full bg-yellow-400"></span>
+      <span class="w-2.5 h-2.5 rounded-full bg-green-400"></span>
+    </div>
+    <span class="text-[9px] font-display tracking-wider zag-text-muted flex-1">SECTIONS</span>
+    <span id="toc-chevron" class="text-xs zag-text-muted transition-transform duration-200">▼</span>
+  </button>
+  <div id="toc-mobile-body" class="hidden">
+    <div class="max-h-[50vh] overflow-y-auto">
+      <ul id="toc-mobile-list" class="px-3 py-2 text-xs font-mono space-y-0.5">
+      </ul>
+    </div>
+  </div>
+</div>
+
+<!-- Desktop fixed sidebar -->
+<div
+  id="toc-sidebar"
+  class="hidden xl:block fixed right-4 top-32 w-56 z-40 opacity-0 transition-opacity duration-500"
+>
+  <div class="border zag-border-b rounded zag-bg/90 backdrop-blur-sm zag-transition overflow-hidden">
+    <div class="flex items-center gap-2 px-3 py-1.5 border-b zag-border-b zag-transition">
+      <div class="flex gap-1">
+        <span class="w-2.5 h-2.5 rounded-full bg-red-400"></span>
+        <span class="w-2.5 h-2.5 rounded-full bg-yellow-400"></span>
+        <span class="w-2.5 h-2.5 rounded-full bg-green-400"></span>
+      </div>
+      <span class="text-[9px] font-display tracking-wider zag-text-muted">SECTIONS</span>
+    </div>
+    <div class="max-h-[60vh] overflow-y-auto">
+      <ul id="toc-desktop-list" class="px-3 py-2 text-xs font-mono space-y-0.5"></ul>
+    </div>
+    <div class="flex items-center gap-1 px-3 py-1.5 border-t zag-border-b zag-transition text-xs font-mono">
+      <span class="text-emerald-500">$</span>
+      <span id="toc-blinking-cursor" class="inline-block w-2 h-3.5 bg-emerald-500"></span>
+    </div>
+  </div>
+</div>
+
+<style>
+  @keyframes toc-blink {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0; }
+  }
+  #toc-blinking-cursor {
+    animation: toc-blink 1s step-end infinite;
+  }
+</style>
+
+<script>
+  const proseEl = document.querySelector(".prose");
+  const headings = proseEl?.querySelectorAll("h2, h3");
+
+  if (headings && headings.length > 1) {
+    // Ensure headings have IDs
+    headings.forEach((h) => {
+      if (!h.id) {
+        h.id = h.textContent.toLowerCase().replace(/\s+/g, "-").replace(/[^\w-]/g, "");
+      }
+    });
+
+    const entries = [...headings].map((h) => ({
+      id: h.id,
+      text: h.textContent,
+      tag: h.tagName,
+    }));
+
+    // ---- Render both TOC lists ----
+    const desktopList = document.getElementById("toc-desktop-list");
+    const mobileList = document.getElementById("toc-mobile-list");
+    const lists = [desktopList, mobileList];
+
+    lists.forEach((list) => {
+      if (!list) return;
+      entries.forEach((entry) => {
+        const li = document.createElement("li");
+        li.className = "flex items-center gap-1.5 py-0.5";
+        if (entry.tag === "H3") li.style.paddingLeft = "1rem";
+
+        const prompt = document.createElement("span");
+        prompt.className = "text-emerald-500/50 transition-all duration-200 text-[10px] flex-shrink-0";
+        prompt.textContent = "$";
+
+        const link = document.createElement("a");
+        link.href = "#" + entry.id;
+        link.textContent = entry.text;
+        link.className = "no-underline zag-text-muted/60 transition-all duration-200 truncate hover:underline zag-offset flex-1 min-w-0";
+
+        link.addEventListener("click", (e) => {
+          e.preventDefault();
+          document.getElementById(entry.id)?.scrollIntoView({ behavior: "smooth" });
+          history.replaceState(null, "", "#" + entry.id);
+        });
+
+        li.appendChild(prompt);
+        li.appendChild(link);
+        list.appendChild(li);
+      });
+    });
+
+    // ---- Mobile toggle ----
+    const toggleBtn = document.getElementById("toc-toggle");
+    const mobileBody = document.getElementById("toc-mobile-body");
+    const chevron = document.getElementById("toc-chevron");
+
+    toggleBtn?.addEventListener("click", () => {
+      const isOpen = mobileBody.classList.toggle("hidden");
+      chevron.textContent = isOpen ? "▼" : "▲";
+      chevron.style.transform = isOpen ? "rotate(0deg)" : "rotate(180deg)";
+    });
+
+    // ---- Scroll tracking (shared) ----
+    const desktopItems = desktopList?.querySelectorAll("li");
+    const mobileItems = mobileList?.querySelectorAll("li");
+    const headingArray = [...headings];
+
+    function setItemState(item, state) {
+      if (!item) return;
+      const link = item.querySelector("a");
+      const prompt = item.querySelector(":scope > span");
+      if (!link) return;
+
+      if (state === "active") {
+        link.className = "no-underline zag-text transition-all duration-200 truncate flex-1 min-w-0";
+        if (prompt) prompt.className = "text-emerald-500 transition-all duration-200 text-[10px] flex-shrink-0";
+        item.style.opacity = "1";
+      } else if (state === "past") {
+        link.className = "no-underline zag-text-muted/40 transition-all duration-200 truncate flex-1 min-w-0";
+        if (prompt) prompt.className = "text-emerald-500/30 transition-all duration-200 text-[10px] flex-shrink-0";
+        item.style.opacity = "1";
+      } else {
+        link.className = "no-underline zag-text-muted/30 transition-all duration-200 truncate flex-1 min-w-0";
+        if (prompt) prompt.className = "text-emerald-500/20 transition-all duration-200 text-[10px] flex-shrink-0";
+        item.style.opacity = "1";
+      }
+    }
+
+    function updateToc() {
+      const scrollTop = window.scrollY + 200;
+      let currentIdx = -1;
+      headingArray.forEach((h, i) => {
+        if (h.offsetTop <= scrollTop) currentIdx = i;
+      });
+      if (currentIdx < 0 && headingArray.length > 0) currentIdx = 0;
+
+      desktopItems?.forEach((item, i) => {
+        setItemState(item, i === currentIdx ? "active" : i < currentIdx ? "past" : "future");
+      });
+      mobileItems?.forEach((item, i) => {
+        setItemState(item, i === currentIdx ? "active" : i < currentIdx ? "past" : "future");
+      });
+    }
+
+    // Show desktop sidebar
+    const sidebar = document.getElementById("toc-sidebar");
+    requestAnimationFrame(() => { sidebar.style.opacity = "1"; });
+
+    window.addEventListener("scroll", () => requestAnimationFrame(updateToc));
+    updateToc();
+  }
+</script>

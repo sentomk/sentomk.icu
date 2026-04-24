@@ -1,6 +1,7 @@
 ---
 import Section from "../components/common/Section.astro";
 import Prose from "../components/Prose.astro";
+import SidebarToc from "../components/SidebarToc.astro";
 import type { ArticleFrontmatter } from "../lib/types";
 import { getConfigurationCollection, processArticleDate } from "../lib/utils";
 import Layout from "./Layout.astro";
@@ -70,11 +71,7 @@ const { data: config } = await getConfigurationCollection();
         <span>{frontmatter.readTime} min</span>
       </div>
     </div>
-    <!-- Table of Contents -->
-    <nav id="toc" class="zag-border-b zag-transition mb-8 pb-4 hidden">
-      <span class="text-xs font-display tracking-wider zag-text-muted">CONTENTS</span>
-      <ul class="mt-2 flex flex-col gap-1.5 text-sm"></ul>
-    </nav>
+    <SidebarToc />
     <Prose>
       <slot />
     </Prose>
@@ -102,33 +99,4 @@ const { data: config } = await getConfigurationCollection();
       ticking = true;
     }
   });
-
-  // Table of Contents
-  const tocNav = document.getElementById("toc");
-  const tocList = tocNav.querySelector("ul");
-  const headings = document.querySelector(".prose")?.querySelectorAll("h2, h3");
-
-  if (headings && headings.length > 1) {
-    const tags = ["H2", "H3"];
-    headings.forEach((h, i) => {
-      if (!tags.includes(h.tagName)) return;
-      if (!h.id) {
-        h.id = h.textContent.toLowerCase().replace(/\s+/g, "-").replace(/[^\w-]/g, "");
-      }
-      const li = document.createElement("li");
-      li.className = h.tagName === "H3" ? "pl-4" : "";
-      const a = document.createElement("a");
-      a.href = "#" + h.id;
-      a.textContent = h.textContent;
-      a.className = "zag-text-muted hover:zag-text zag-transition no-underline";
-      a.addEventListener("click", (e) => {
-        e.preventDefault();
-        h.scrollIntoView({ behavior: "smooth" });
-        history.replaceState(null, "", "#" + h.id);
-      });
-      li.appendChild(a);
-      tocList.appendChild(li);
-    });
-    tocNav.classList.remove("hidden");
-  }
 </script>
