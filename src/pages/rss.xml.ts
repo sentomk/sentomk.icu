@@ -17,7 +17,7 @@ export async function GET() {
 				title: post.data.title,
 				description: post.data.description,
 				pubDate: post.data.timestamp,
-				link: `${siteUrl}/blog/${post.data.slug}`,
+				link: `${siteUrl}/posts/${post.data.slug}`,
 			})),
 	});
 }

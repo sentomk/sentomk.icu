@@ -1,6 +1,6 @@
 ---
 import { getCollection, render } from "astro:content";
-import BlogLayout from "../../layouts/BlogLayout.astro";
+import PostLayout from "../../layouts/PostLayout.astro";
 import { getConfigurationCollection } from "../../lib/utils";
 
 export async function getStaticPaths() {
@@ -28,7 +28,7 @@ export async function getStaticPaths() {
 					...article,
 					data: {
 						...article.data,
-						url: `${config.site.baseUrl}/blog/${article.data.slug}`,
+						url: `${config.site.baseUrl}/posts/${article.data.slug}`,
 					},
 				},
 				prev: prev ? { title: prev.data.title, slug: prev.data.slug } : null,
@@ -42,21 +42,21 @@ const { article, prev, next } = Astro.props;
 const { Content } = await render(article);
 ---
 
-<BlogLayout frontmatter={article.data}>
+<PostLayout frontmatter={article.data}>
   <Content />
   {
     (prev || next) && (
       <nav class="flex justify-between gap-4 mt-12 pt-4">
         <div class="flex-1 min-w-0">
           {prev && (
-            <a href={`/blog/${prev.slug}`} class="text-sm font-mono hover:underline zag-offset">
+            <a href={`/posts/${prev.slug}`} class="text-sm font-mono hover:underline zag-offset">
               &larr; {prev.title}
             </a>
           )}
         </div>
         <div class="flex-1 min-w-0 text-right">
           {next && (
-            <a href={`/blog/${next.slug}`} class="text-sm font-mono hover:underline zag-offset">
+            <a href={`/posts/${next.slug}`} class="text-sm font-mono hover:underline zag-offset">
               {next.title} &rarr;
             </a>
           )}
@@ -64,4 +64,4 @@ const { Content } = await render(article);
       </nav>
     )
   }
-</BlogLayout>
+</PostLayout>

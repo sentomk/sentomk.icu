@@ -1,15 +1,13 @@
 ---
 import { getCollection } from "astro:content";
-import ArticleSnippet from "../../components/ArticleSnippet.astro";
+import PostSnippet from "../../components/PostSnippet.astro";
 import Section from "../../components/common/Section.astro";
 import Layout from "../../layouts/Layout.astro";
 import { getConfigurationCollection } from "../../lib/utils";
 
 const articles = (await getCollection("blog")).sort(
-	(a, b) => b.data.timestamp.valueOf() - a.data.timestamp.valueOf(),
+    (a, b) => b.data.timestamp.valueOf() - a.data.timestamp.valueOf(),
 );
-
-const allTags = [...new Set(articles.flatMap((a) => a.data.tags ?? []))].sort();
 
 const { data: config } = await getConfigurationCollection();
 ---
@@ -35,7 +33,7 @@ const { data: config } = await getConfigurationCollection();
     {config.blogMeta.cardImage && (
       <meta property="og:image" content={config.blogMeta.cardImage} />
     )}
-    <meta property="og:url" content={`${config.site.baseUrl}/blog`} />
+    <meta property="og:url" content={`${config.site.baseUrl}/posts`} />
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content={config.blogMeta.title} />
     <meta
@@ -47,7 +45,7 @@ const { data: config } = await getConfigurationCollection();
     )}
     <meta http-equiv="content-language" content="en" />
     <meta name="language" content="English" />
-    <link rel="canonical" href={`${config.site.baseUrl}/blog`} />
+    <link rel="canonical" href={`${config.site.baseUrl}/posts`} />
   </Fragment>
   <Section class="my-8">
     <div class="flex items-center gap-4 pt-8 pb-8">
@@ -55,25 +53,15 @@ const { data: config } = await getConfigurationCollection();
         {config.texts.articlesName}
       </h1>
     </div>
-    {
-      allTags.length > 0 && (
-        <div id="tag-filter" class="flex gap-2 flex-wrap pb-6" role="group" aria-label="Filter by tag">
-          <button data-tag="" class="tag-btn active font-display text-[0.6rem] tracking-wider px-3 py-1.5 border cursor-pointer zag-transition">All</button>
-          {allTags.map((tag) => (
-            <button data-tag={tag} class="tag-btn font-display text-[0.6rem] tracking-wider px-3 py-1.5 border cursor-pointer zag-transition">{tag}</button>
-          ))}
-        </div>
-      )
-    }
-    <ul id="article-list">
+    <ul>
       {
         articles.map((article) => (
-          <li data-tags={(article.data.tags ?? []).join(",")} class="article-item">
-            <ArticleSnippet
+          <li>
+            <PostSnippet
               title={article.data.title}
               description={article.data.description}
               duration={`${article.data.readTime} min`}
-              url={`/blog/${article.data.slug}`}
+              url={`/posts/${article.data.slug}`}
               timestamp={article.data.timestamp}
               tags={article.data.tags}
             />
@@ -83,24 +71,3 @@ const { data: config } = await getConfigurationCollection();
     </ul>
   </Section>
 </Layout>
-
-<script>
-  const filterBtns = document.querySelectorAll(".tag-btn");
-  const articles = document.querySelectorAll(".article-item");
-
-  filterBtns.forEach((btn) => {
-    btn.addEventListener("click", () => {
-      filterBtns.forEach((b) => b.classList.remove("active"));
-      btn.classList.add("active");
-      const tag = btn.getAttribute("data-tag");
-      articles.forEach((article) => {
-        const tags = article.getAttribute("data-tags");
-        if (!tag || tags.includes(tag)) {
-          article.style.display = "";
-        } else {
-          article.style.display = "none";
-        }
-      });
-    });
-  });
-</script>

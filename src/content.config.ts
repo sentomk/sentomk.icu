@@ -238,8 +238,9 @@ const configuration = defineCollection({
     menu: z.object({
       home: z.string().default("/"),
       projects: z.string().default("/projects"),
-      articles: z.string().default("/blog"),
+      posts: z.string().default("/posts"),
       series: z.string().default("/series"),
+	      categories: z.string().default("/categories"),
     }),
   }),
 });

@@ -53,7 +53,7 @@ linkedinProfile = "https://www.linkedin.com/in/sentomk"
 hackerNewsProfile = "https://news.ycombinator.com/user?id=sentomk"
 
 [_.texts]
-articlesName = "Articles"
+articlesName = "Posts"
 projectsName = "Projects"
 viewAll = "View All"
 noArticles = "No articles found."
@@ -64,5 +64,6 @@ noSeries = "No series found."
 [_.menu]
 home = "/"
 projects = "/projects"
-articles = "/blog"
+posts = "/posts"
+categories = "/categories"
 series = "/series"

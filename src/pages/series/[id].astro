@@ -87,7 +87,7 @@ const { data: config } = await getConfigurationCollection();
     <ul class="flex flex-col gap-10">
       {posts.map((post) => (
         <li>
-          <a href={`/blog/${post.data.slug}`} class="group block no-underline">
+          <a href={`/posts/${post.data.slug}`} class="group block no-underline">
             <span class="font-mono font-medium text-base sm:text-lg group-hover:underline zag-offset">
               {post.data.title}
             </span>

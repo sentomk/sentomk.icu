@@ -36,7 +36,7 @@ const { data: config } = await getConfigurationCollection();
     }
     <meta
       property="og:url"
-      content={`${config.site.baseUrl}/blog/${frontmatter.slug}`}
+      content={`${config.site.baseUrl}/posts/${frontmatter.slug}`}
     />
     <meta name="twitter:card" content="summary_large_image" />
     <meta
@@ -53,7 +53,7 @@ const { data: config } = await getConfigurationCollection();
     <meta name="language" content="English" />
     <link
       rel="canonical"
-      href={`${config.site.baseUrl}/blog/${frontmatter.slug}`}
+      href={`${config.site.baseUrl}/posts/${frontmatter.slug}`}
     />
   </Fragment>
   <!-- Reading progress bar -->

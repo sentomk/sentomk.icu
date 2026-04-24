@@ -1,0 +1,58 @@
+---
+import { getCollection } from "astro:content";
+import PostSnippet from "../../components/PostSnippet.astro";
+import Section from "../../components/common/Section.astro";
+import Layout from "../../layouts/Layout.astro";
+import { getConfigurationCollection } from "../../lib/utils";
+
+export async function getStaticPaths() {
+	const articles = await getCollection("blog");
+	const allTags = [...new Set(articles.flatMap((a) => a.data.tags ?? []))];
+
+	return allTags.map((tag) => ({
+		params: { tag },
+		props: { tag },
+	}));
+}
+
+const { tag } = Astro.props;
+const articles = (await getCollection("blog"))
+	.filter((a) => a.data.tags?.includes(tag))
+	.sort((a, b) => b.data.timestamp.valueOf() - a.data.timestamp.valueOf());
+
+const { data: config } = await getConfigurationCollection();
+---
+
+<Layout>
+	<Fragment slot="head">
+		<title>{tag} • {config.personal.name}</title>
+		<meta name="description" content={`Posts tagged with "${tag}"`} />
+		<meta property="og:title" content={`${tag} • ${config.personal.name}`} />
+		<meta property="og:description" content={`Posts tagged with "${tag}"`} />
+		<meta property="og:url" content={`${config.site.baseUrl}/categories/${tag}`} />
+		<meta name="twitter:card" content="summary_large_image" />
+		<meta http-equiv="content-language" content="en" />
+		<meta name="language" content="English" />
+		<link rel="canonical" href={`${config.site.baseUrl}/categories/${tag}`} />
+	</Fragment>
+	<Section class="my-8">
+		<div class="flex items-center gap-4 pt-8 pb-2">
+			<h1 class="font-display text-3xl sm:text-4xl leading-loose">{tag}</h1>
+		</div>
+		<a href="/categories" class="text-sm font-mono zag-text-muted hover:underline no-underline">&larr; All categories</a>
+		<ul class="mt-8">
+			{articles.map((article) => (
+				<li>
+					<PostSnippet
+						title={article.data.title}
+						description={article.data.description}
+						duration={`${article.data.readTime} min`}
+						url={`/posts/${article.data.slug}`}
+						timestamp={article.data.timestamp}
+						tags={article.data.tags}
+					/>
+				</li>
+			))}
+		</ul>
+	</Section>
+</Layout>

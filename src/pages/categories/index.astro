@@ -1,0 +1,50 @@
+---
+import { getCollection } from "astro:content";
+import Section from "../../components/common/Section.astro";
+import Layout from "../../layouts/Layout.astro";
+import { getConfigurationCollection } from "../../lib/utils";
+
+const articles = await getCollection("blog");
+const { data: config } = await getConfigurationCollection();
+
+const tags = [...new Set(articles.flatMap((a) => a.data.tags ?? []))].sort();
+const counts = Object.fromEntries(
+	tags.map((tag) => [tag, articles.filter((a) => a.data.tags?.includes(tag)).length])
+);
+---
+
+<Layout>
+	<Fragment slot="head">
+		<title>Categories • {config.personal.name}</title>
+		<meta name="description" content="All categories on sentomk.me" />
+		<meta property="og:title" content={`Categories • ${config.personal.name}`} />
+		<meta property="og:description" content="All categories on sentomk.me" />
+		<meta property="og:url" content={`${config.site.baseUrl}/categories`} />
+		<meta name="twitter:card" content="summary_large_image" />
+		<meta http-equiv="content-language" content="en" />
+		<meta name="language" content="English" />
+		<link rel="canonical" href={`${config.site.baseUrl}/categories`} />
+	</Fragment>
+	<Section class="my-8">
+		<div class="flex items-center gap-4 pt-8 pb-8">
+			<h1 class="font-display text-3xl sm:text-4xl leading-loose">Categories</h1>
+		</div>
+		{tags.length > 0 ? (
+			<ul class="flex flex-col gap-3">
+				{tags.map((tag) => (
+					<li>
+						<a
+							href={`/categories/${tag}`}
+							class="flex items-center justify-between font-mono text-lg hover:underline zag-offset no-underline"
+						>
+							<span>{tag}</span>
+							<span class="zag-text-muted text-base">{counts[tag]} posts</span>
+						</a>
+					</li>
+				))}
+			</ul>
+		) : (
+			<p class="zag-text-muted">No categories yet.</p>
+		)}
+	</Section>
+</Layout>

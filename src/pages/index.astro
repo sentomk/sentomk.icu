@@ -26,7 +26,7 @@ const featuredArticles = (
 	await getCollection("blog", (e) => e.data.featured)
 ).map((e) => ({
 	...e.data,
-  url: `/blog/${e.data.slug}`,
+  url: `/posts/${e.data.slug}`,
 }));
 ---
 
