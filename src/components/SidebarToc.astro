@@ -100,6 +100,9 @@
           e.preventDefault();
           document.getElementById(entry.id)?.scrollIntoView({ behavior: "smooth" });
           history.replaceState(null, "", "#" + entry.id);
+          // Lock scroll tracking briefly so the active heading sticks
+          clickLock = true;
+          setTimeout(() => { clickLock = false; }, 800);
         });
 
         li.appendChild(prompt);
@@ -123,6 +126,7 @@
     const desktopItems = desktopList?.querySelectorAll("li");
     const mobileItems = mobileList?.querySelectorAll("li");
     const headingArray = [...headings];
+    let clickLock = false;
 
     function setItemState(item, state) {
       if (!item) return;
@@ -146,7 +150,8 @@
     }
 
     function updateToc() {
-      const scrollTop = window.scrollY + 200;
+      if (clickLock) return;
+      const scrollTop = window.scrollY + 100;
       let currentIdx = -1;
       headingArray.forEach((h, i) => {
         if (h.offsetTop <= scrollTop) currentIdx = i;
