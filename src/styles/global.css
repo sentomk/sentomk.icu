@@ -65,7 +65,40 @@
 
   ::selection {
     background-color: var(--color-zag-accent-light);
-    color: var(--color-zag-dark-muted);
+    color: var(--color-zag-dark);
+  }
+  :where(.dark, .dark *) ::selection {
+    background-color: var(--color-zag-accent-dark-muted);
+    color: var(--color-zag-light);
+  }
+
+  /* Subtle dot-grid background texture */
+  body::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 100;
+    background-image: radial-gradient(circle, currentColor 0.5px, transparent 0.5px);
+    background-size: 24px 24px;
+    opacity: 0.04;
+  }
+
+  /* Typewriter effect for hero subtitle */
+  @keyframes blink {
+    0%, 100% { border-color: currentColor; }
+    50% { border-color: transparent; }
+  }
+  .typewriter-line {
+    display: inline-block;
+    overflow: hidden;
+    white-space: nowrap;
+    vertical-align: top;
+    border-right: 2px solid currentColor;
+    animation: blink 0.7s step-end infinite;
+  }
+  .typewriter-line.solid {
+    animation: none;
   }
 
   .zag-transition {

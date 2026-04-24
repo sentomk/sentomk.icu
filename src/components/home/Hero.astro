@@ -4,16 +4,21 @@ import { getConfigurationCollection } from "../../lib/utils";
 const { data: config } = await getConfigurationCollection();
 ---
 
-<div class="flex flex-col items-center sm:flex-row gap-8">
+<div class="flex flex-col items-center sm:flex-row gap-6 sm:gap-12">
   <img
     src={config.hero.image}
     alt={`${config.hero.title} Profile Image`}
-    class="rounded-full max-w-40 w-40 h-40 z-0 grayscale"
+    class="rounded-full max-w-28 w-28 h-28 sm:max-w-36 sm:w-36 sm:h-36 z-0 grayscale"
   />
-  <div class="flex flex-col gap-2">
-    <h1 class="text-3xl sm:text-4xl font-display font-semibold opsz text-center sm:text-left">
-      {config.hero.title}
-    </h1>
+  <div class="flex flex-col gap-5">
+    <div class="flex flex-col gap-1">
+      <h1 class="text-2xl sm:text-4xl font-display font-semibold opsz text-center sm:text-left">
+        {config.hero.title}
+      </h1>
+      <span class="text-base sm:text-lg font-mono font-medium text-center sm:text-left zag-text-muted">
+        <span id="typewriter" class="typewriter-line tw-cursor">{config.hero.subtitle}</span>
+      </span>
+    </div>
     <div class="flex items-center gap-4 justify-center sm:justify-start">
       {
         config.personal.githubProfile && (
@@ -57,8 +62,43 @@ const { data: config } = await getConfigurationCollection();
         )
       }
     </div>
-    <span class="text-lg sm:text-xl font-mono font-medium text-center sm:text-left">
-      Code & Notes
-    </span>
   </div>
 </div>
+
+<script>
+  const el = document.getElementById("typewriter");
+  const text = el.textContent;
+  const total = text.length;
+  let idx = 0;
+  let dir = 1;
+
+  el.style.width = "0ch";
+
+  function typingDelay() {
+    return 60 + Math.random() * 60;
+  }
+
+  function deletingDelay() {
+    return 50 + Math.random() * 50;
+  }
+
+  function step() {
+    idx += dir;
+    el.style.width = idx + "ch";
+
+    if (idx === total) {
+      dir = -1;
+      el.classList.remove("solid");
+      setTimeout(step, 2500 + Math.random() * 500);
+    } else if (idx === 0) {
+      dir = 1;
+      el.classList.remove("solid");
+      setTimeout(step, 1500 + Math.random() * 500);
+    } else {
+      el.classList.add("solid");
+      setTimeout(step, dir > 0 ? typingDelay() : deletingDelay());
+    }
+  }
+
+  setTimeout(step, 800);
+</script>

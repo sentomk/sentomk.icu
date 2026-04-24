@@ -56,6 +56,8 @@ const { data: config } = await getConfigurationCollection();
       href={`${config.site.baseUrl}/blog/${frontmatter.slug}`}
     />
   </Fragment>
+  <!-- Reading progress bar -->
+  <div id="progress-bar" class="fixed top-0 left-0 h-[2px] z-50 zag-transition" style="background: currentColor; width: 0%; opacity: 0;"></div>
   <Section class="pt-8">
     <div class="flex flex-col gap-4 mt-8 mb-16">
       <h1
@@ -68,9 +70,66 @@ const { data: config } = await getConfigurationCollection();
         <span>{frontmatter.readTime} min</span>
       </div>
     </div>
+    <!-- Table of Contents -->
+    <nav id="toc" class="zag-border-b zag-transition mb-8 pb-4 hidden">
+      <span class="text-xs font-display tracking-wider zag-text-muted">CONTENTS</span>
+      <ul class="mt-2 flex flex-col gap-1.5 text-sm"></ul>
+    </nav>
     <Prose>
       <slot />
     </Prose>
     <p class="pt-8">~{config.personal.name}</p>
   </Section>
 </Layout>
+
+<script>
+  // Reading progress bar
+  const bar = document.getElementById("progress-bar");
+  let ticking = false;
+
+  function updateProgress() {
+    const scrollTop = document.documentElement.scrollTop;
+    const scrollHeight = document.documentElement.scrollHeight - window.innerHeight;
+    if (scrollHeight <= 0) return;
+    const progress = (scrollTop / scrollHeight) * 100;
+    bar.style.width = progress + "%";
+    bar.style.opacity = progress > 1 ? "1" : "0";
+    ticking = false;
+  }
+
+  window.addEventListener("scroll", () => {
+    if (!ticking) {
+      requestAnimationFrame(updateProgress);
+      ticking = true;
+    }
+  });
+
+  // Table of Contents
+  const tocNav = document.getElementById("toc");
+  const tocList = tocNav.querySelector("ul");
+  const headings = document.querySelector(".prose")?.querySelectorAll("h2, h3");
+
+  if (headings && headings.length > 1) {
+    const tags = ["H2", "H3"];
+    headings.forEach((h, i) => {
+      if (!tags.includes(h.tagName)) return;
+      if (!h.id) {
+        h.id = h.textContent.toLowerCase().replace(/\s+/g, "-").replace(/[^\w-]/g, "");
+      }
+      const li = document.createElement("li");
+      li.className = h.tagName === "H3" ? "pl-4" : "";
+      const a = document.createElement("a");
+      a.href = "#" + h.id;
+      a.textContent = h.textContent;
+      a.className = "zag-text-muted hover:zag-text zag-transition no-underline";
+      a.addEventListener("click", (e) => {
+        e.preventDefault();
+        h.scrollIntoView({ behavior: "smooth" });
+        history.replaceState(null, "", "#" + h.id);
+      });
+      li.appendChild(a);
+      tocList.appendChild(li);
+    });
+    tocNav.classList.remove("hidden");
+  }
+</script>

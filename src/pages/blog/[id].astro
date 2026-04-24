@@ -1,29 +1,68 @@
 ---
 import { getCollection, render } from "astro:content";
 import BlogLayout from "../../layouts/BlogLayout.astro";
+import Anchor from "../../components/common/Anchor.astro";
 import { getConfigurationCollection } from "../../lib/utils";
 
 export async function getStaticPaths() {
 	const posts = await getCollection("blog");
+	const allPosts = await getCollection("blog");
 	const { data: config } = await getConfigurationCollection();
-	return posts.map((article) => ({
-		params: { id: article.data.slug },
-		props: {
-			article: {
-				...article,
-				data: {
-					...article.data,
-					url: `${config.site.baseUrl}/blog/${article.data.slug}`,
+
+	return posts.map((article) => {
+		let prev, next;
+
+		if (article.data.series) {
+			const siblings = allPosts
+				.filter((p) => p.data.series === article.data.series)
+				.sort((a, b) => a.data.timestamp.valueOf() - b.data.timestamp.valueOf());
+
+			const idx = siblings.findIndex((p) => p.data.slug === article.data.slug);
+			if (idx > 0) prev = siblings[idx - 1];
+			if (idx >= 0 && idx < siblings.length - 1) next = siblings[idx + 1];
+		}
+
+		return {
+			params: { id: article.data.slug },
+			props: {
+				article: {
+					...article,
+					data: {
+						...article.data,
+						url: `${config.site.baseUrl}/blog/${article.data.slug}`,
+					},
 				},
+				prev: prev ? { title: prev.data.title, slug: prev.data.slug } : null,
+				next: next ? { title: next.data.title, slug: next.data.slug } : null,
 			},
-		},
-	}));
+		};
+	});
 }
 
-const { article } = Astro.props;
+const { article, prev, next } = Astro.props;
 const { Content } = await render(article);
 ---
 
 <BlogLayout frontmatter={article.data}>
   <Content />
+  {
+    (prev || next) && (
+      <nav class="flex justify-between items-center mt-12 zag-border-b zag-transition pb-4">
+        <div>
+          {prev && (
+            <Anchor url={`/blog/${prev.slug}`} class="text-sm font-display tracking-wider hover:opacity-70 zag-transition">
+              &larr; {prev.title}
+            </Anchor>
+          )}
+        </div>
+        <div class="text-right">
+          {next && (
+            <Anchor url={`/blog/${next.slug}`} class="text-sm font-display tracking-wider hover:opacity-70 zag-transition">
+              {next.title} &rarr;
+            </Anchor>
+          )}
+        </div>
+      </nav>
+    )
+  }
 </BlogLayout>

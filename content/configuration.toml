@@ -40,7 +40,7 @@ cardImage = "https://sentomk.me/favicon-32.png"
 
 [_.hero]
 title = "sentomk.me"
-subtitle = "Code &<br />Notes"
+subtitle = "Code & Notes"
 image = "/avatar.png"
 ctaText = "View Projects"
 ctaUrl = "/projects"

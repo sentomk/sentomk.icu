@@ -56,6 +56,16 @@ const { data: config } = await getConfigurationCollection();
             </li>
           ))}
         </ul>
+        <!-- Series navigation: link to first post -->
+        <nav class="flex justify-between items-center pt-4 zag-border-b zag-transition pb-4">
+          <div>
+            {posts[0] && (
+              <Anchor url={`/blog/${posts[0].data.slug}`} class="text-sm font-display tracking-wider hover:opacity-70 zag-transition">
+                &larr; Start Reading
+              </Anchor>
+            )}
+          </div>
+        </nav>
       </div>
     )
   }
